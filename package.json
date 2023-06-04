@@ -1,0 +1,105 @@
+{
+  "name": "electron-vue-spring-autoupdate",
+  "version": "1.0.0",
+  "description": "A minimal starter project for using Electron, Vue and Spring.",
+  "author": "Jaeseop Lee",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leejaesup/electron-vue-spring-autoupdate.git"
+  },
+  "main": "electron/index.js",
+  "scripts": {
+    "start": "electron ./electron",
+    "build-server": "node build/build-server.js",
+    "build-installer": "node build/build-installer.js",
+    "build": "npm-run-all clean build-server build-installer",
+    "clean": "rimraf dist"
+  },
+  "license": "MIT",
+  "build": {
+    "appId": "electron-vue-spring-autoupdate",
+    "productName": "INSERT_APP_NAME",
+    "copyright": "Copyright 2023 JS, Inc",
+    "asar": true,
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "https://www.mentorit.co.kr/egspro_test/"
+      }
+    ],
+    "files": [
+      "electron/**/*",
+      "node_modules/**/*",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/*.d.ts",
+      "!**/node_modules/.bin",
+      "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
+      "!.editorconfig",
+      "!**/._*",
+      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
+      "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
+      "!**/{appveyor.yml,.travis.yml,circle.yml}",
+      "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
+    ],
+    "extraFiles": [
+      {
+        "from": "spring/build/libs",
+        "filter": [
+          "*.jar"
+        ]
+      }
+    ],
+    "mac": {
+      "category": "insert.app.category",
+      "target": [
+        "default"
+      ],
+      "icon": "build/resources/icons/INSERT_APP_IMAGE.icns"
+    },
+    "dmg": {
+      "title": "INSERT_APP_NAME",
+      "icon": "build/resources/icons/INSERT_APP_IMAGE.icns"
+    },
+    "win": {
+      "target": [
+        "zip",
+        "nsis"
+      ],
+      "icon": "build/resources/icons/INSERT_APP_IMAGE.ico"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm",
+        "zip",
+        "tar.gz"
+      ],
+      "icon": "build/resources/icons/INSERT_APP_IMAGE.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "include": "build/resources/win/nsis/installer.nsh"
+    }
+  },
+  "devDependencies": {
+    "electron": "^24.0.0",
+    "electron-builder": "^23.6.0",
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^5.0.0",
+    "shelljs": "^0.8.5"
+  },
+  "dependencies": {
+    "axios": "^1.3.5",
+    "electron-is-dev": "^2.0.0",
+    "electron-log": "^4.4.8",
+    "electron-progressbar": "^2.1.0",
+    "electron-updater": "^5.3.0",
+    "find-free-port": "^2.0.0",
+    "tree-kill": "^1.2.2"
+  }
+}
